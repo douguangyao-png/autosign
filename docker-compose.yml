@@ -1,0 +1,12 @@
+services:
+  qinglong:
+    image: docker.io/whyour/qinglong:latest
+    container_name: qinglong
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5700:5700"  # 仅本机监听；公网访问走 nginx HTTPS 反代 (task.aipnm.net)
+    volumes:
+      - ./ql/data:/ql/data:Z
+      - ./scripts:/ql/data/scripts/autosign:Z
+    environment:
+      - TZ=Asia/Shanghai

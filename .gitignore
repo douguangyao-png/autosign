@@ -1,0 +1,15 @@
+ql/
+__pycache__/
+*.pyc
+*.pyo
+.env
+.DS_Store
+
+# Claude Code 本地配置
+.claude/
+.plugin-config/
+.todos-report.md
+
+# Phase 2 运行时数据
+scripts/records.db
+scripts/.rank_collect.lock
