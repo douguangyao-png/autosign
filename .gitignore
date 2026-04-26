@@ -13,3 +13,7 @@ __pycache__/
 # Phase 2 运行时数据
 scripts/records.db
 scripts/.rank_collect.lock
+
+# pytest
+.pytest_cache/
+tests/__pycache__/
