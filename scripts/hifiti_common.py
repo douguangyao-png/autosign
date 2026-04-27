@@ -4,6 +4,7 @@ Phase 1 (hifiti_sign.py) 和 Phase 2 (hifiti_rank_collect.py) 都从这里导入
 """
 from __future__ import annotations
 
+import hashlib
 import time
 from typing import Tuple
 
@@ -82,11 +83,13 @@ def login(session: requests.Session, account: str, password: str) -> Tuple[bool,
     except requests.RequestException:
         pass
 
+    # hifiti 登录页 JS 强制 $.md5(password) 后再提交，明文会被服务器拒绝（code=password）
+    hashed = hashlib.md5(password.encode("utf-8")).hexdigest()
     resp = request_with_retry(
         session,
         "POST",
         LOGIN_URL,
-        data={"email": account, "password": password},
+        data={"email": account, "password": hashed},
         headers={
             "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
             "Origin": BASE_URL,
